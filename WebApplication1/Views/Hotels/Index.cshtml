@@ -1,0 +1,149 @@
+﻿@model List<Hotel>
+@{
+    ViewBag.Title = "Hotels";
+    var counter = 0;
+}
+
+@section Styles {
+    <style>
+        body {
+            background-color: black;
+            position: relative;
+        }
+
+        h5, p {
+            margin: 0;
+        }
+
+        .container {
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+            grid-gap: 10px;
+            max-width: 1000px;
+        }
+
+        .row {
+            --bs-gutter-x: .5em;
+        }
+
+        .stars {
+            font-size: 30px;
+        }
+
+        .view {
+            color: white;
+            background-color: rgba(var(--bs-primary-rgb));
+            width: 90%;
+            border: none;
+            border-bottom-right-radius: 15px;
+            border-bottom-left-radius: 15px;
+        }
+
+        .add {
+            color: white;
+            background-color: rgba(var(--bs-primary-rgb));
+            position: absolute;
+            right: 15px;
+            top: 80px;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            width: 30px;
+            font-size: 25px;
+        }
+
+        .card {
+            background-color: rgba(var(--bs-warning-rgb));
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-height: 420px;
+            min-height: 420px;
+
+        }
+
+        .image {
+            width: 90%;
+            width: 270px;
+            height: 200px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .x-sign {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border: none;
+            border-radius: 50%;
+            background-color: red;
+            font-size: 20px;
+            width: 30px;
+            height: 30px;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .card-img-top {
+            border-top-right-radius: 30px;
+            border-top-left-radius: 30px;
+            height: 100%;
+            width: 100%;
+        }
+
+        .description {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 17px 40px 17px;
+            width: 270px;
+        }
+
+    </style>
+}
+
+
+
+<button class="add" onclick="location.href='@Url.Action("Create", "Hotels")'">+</button>
+<div class="container">
+        @foreach (var hotel in Model)
+        {
+            if (counter % 3 == 0)
+            {
+                @:<div class="row">
+            }
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="image">
+                        <div class="x-sign" onclick="location.href='@Url.Action("Delete", "Hotels", new { id = hotel.Id })'"><a>x</a></div>
+                        <img class="card-img-top" src="@hotel.ImageUrl" alt="@hotel.Name">
+                    </div>
+                    <div class="description">
+                        <h5>@hotel.Name</h5>
+                        <p class="stars text-primary">
+                            @for (var i = 0; i < hotel.Ranking; i++)
+                            {
+                                <span>★</span>
+                            }
+                        </p>
+                        <p>Location: @hotel.Location</p>
+                    </div>
+                    <button class="view" asp-area="" onclick="location.href='@Url.Action("View", "Hotels", new { id = hotel.Id })'">View</button>
+                </div>
+            </div>
+            counter++;
+            if (counter % 3 == 0)
+            {
+                @:</div>
+            }
+    }
+</div>

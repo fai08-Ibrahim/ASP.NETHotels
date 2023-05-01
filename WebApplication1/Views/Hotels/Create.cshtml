@@ -1,0 +1,71 @@
+﻿@model WebApplication1.Models.Hotel
+
+@{
+    ViewData["Title"] = "Create";
+}
+@section Styles{
+<style>
+    body{
+        background-color: black;
+        color: white;
+    }
+</style>
+}
+
+<form asp-controller="Hotels" asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" type="text" class="form-control">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="Location">Location</label>
+            <input asp-for="Location" type="text" class="form-control">
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+    </div> <br />
+    <div class="row">
+    <div class="form-group col-md-4">
+        <label asp-for="Rooms">Rooms</label>
+        <input type="number" class="form-control" asp-for="Rooms">
+        <span asp-validation-for="Rooms" class="text-danger"></span>
+    </div>
+        <div class="form-group col-md-4">
+        <label asp-for="Phone">Phone</label>
+        <input type="text" class="form-control" asp-for="Phone"/>
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+        <div class="form-group col-md-4">
+            <label  asp-for="Ranking"> Rating</label>
+            <select asp-for="Ranking" class="form-select form-control">
+                <option selected>Open this select menu</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <span asp-validation-for="Ranking" class="text-danger"></span>
+    </div> <br />
+
+    <div class="form-group col-md-6">
+        <label asp-for="ImageUrl">Image URL</label>
+        <input type="text" asp-for="ImageUrl" class="form-control">
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div> <br />
+
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div> <br />
+
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

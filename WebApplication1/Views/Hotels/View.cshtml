@@ -1,0 +1,47 @@
+﻿@model WebApplication1.Models.Hotel
+
+@{
+    ViewData["Title"] = "Details";
+}
+@section Styles{
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            position: relative;
+        }
+
+        .stars {
+            font-size: 20px;
+        }
+
+        .img-thumbnail{
+            border: 4px solid rgb(var(--bs-warning-rgb));
+            border-radius: 20px;
+            padding: 0;
+        }
+
+    </style>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <h2>@Model.Name</h2>
+            <span class="stars text-primary"> 
+                @for(var i = 0; i < Model.Ranking; i++)
+                {
+                    <span>★</span>
+                }
+            </span>
+            <h4>Description</h4>
+            <p>@Model.Description</p> 
+            <p>Location: @Model.Location</p>
+            <p>Rooms: @Model.Rooms</p>
+            <p>Phone @Model.Phone</p>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <img class="img-thumbnail mt-5" src="@Model.ImageUrl" alt="@Model.Name" style="object-fit:cover" />
+        </div>
+    </div>
+</div>
